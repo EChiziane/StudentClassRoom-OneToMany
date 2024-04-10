@@ -28,4 +28,8 @@ public class StudentService {
     public Optional<StudentModel> getOneStudent(UUID id) {
         return studentRepository.findById(id);
     }
+
+    public void DeleteStudent(UUID id) {
+        studentRepository.deleteById(id);
+    }
 }

@@ -43,4 +43,27 @@ public class StudentController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(studentModelOptional);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> DeleteStudent(@PathVariable UUID id) {
+        Optional<StudentModel> studentModelOptional = studentService.getOneStudent(id);
+        if (studentModelOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No student found");
+        }
+        studentService.DeleteStudent(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Student deleted Successfully");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> UpdateStudent(@PathVariable UUID id, @RequestBody StudentDto studentDto) {
+        Optional<StudentModel> studentModelOptional = studentService.getOneStudent(id);
+        if (studentModelOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No student found");
+        }
+        var StudentModel = new StudentModel();
+        BeanUtils.copyProperties(StudentModel, studentDto);
+        StudentModel.setId(studentModelOptional.get().getId());
+        return ResponseEntity.status(HttpStatus.OK).body(studentDto);
+
+    }
 }
