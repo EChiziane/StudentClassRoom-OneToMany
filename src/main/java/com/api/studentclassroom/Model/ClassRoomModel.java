@@ -1,11 +1,11 @@
 package com.api.studentclassroom.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
+
+@Entity
+@Table(name = "TB_CLASSROOM")
 
 public class ClassRoomModel {
     private static final long serialVersionUID = 1L;
